@@ -729,7 +729,12 @@ static NSString *_replaceLaunchImageBackupPath;
         UIGraphicsBeginImageContext(contextSize);
         CGFloat ratio = MAX((contextSize.width / self.size.width),
                             (contextSize.height / self.size.height));
-        CGRect rect = CGRectMake(0, 0, self.size.width * ratio, self.size.height * ratio);
+        CGRect rect;
+        if(vertical){
+            rect = CGRectMake((contextSize.width-self.size.width*ratio)/2, 0, self.size.width * ratio, self.size.height * ratio);
+        }else{
+            rect = CGRectMake(0, (contextSize.height-self.size.height*ratio)/2, self.size.width * ratio, self.size.height * ratio);
+        }
         [self drawInRect:rect];
         UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
